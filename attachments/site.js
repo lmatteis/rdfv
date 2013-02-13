@@ -41,11 +41,11 @@ var comments = {
             var url = '';
             var data = {};
             if(docId) {
-                url = '_update/voteup/' + docId;
+                url = conf_path + '_update/voteup/' + docId;
             } else if(commentId) {
                 // get the docId from the form
                 docId = $('.addcomment').attr('doc_id'); 
-                url = '_update/commentvoteup/' + docId;
+                url = conf_path + '_update/commentvoteup/' + docId;
                 data.comment_id = commentId;
             }
 
@@ -75,7 +75,7 @@ var comments = {
             var data = $this.serialize();
             var docId = $this.attr('doc_id');
             $.ajax({
-                url: '_update/comment/' + docId,
+                url: conf_path + '_update/comment/' + docId,
                 type: 'PUT',
                 data: data,
                 complete: function(req) {
@@ -207,13 +207,12 @@ var item = {
             var data = $(this).serialize();
             $.ajax({
                 type: "POST",
-                url: 'r',
+                url: conf_path + 'r',
                 data: data,
                 complete: function(req) {
                     if (req.status == 200 || req.status == 201 || req.status == 202) {
                         $(location).attr('href', '.');
                     } else {
-                        console.log(2)
                         var j = $.parseJSON(req.responseText);
                         $('.error').text(j.reason);
                     }
@@ -233,7 +232,7 @@ var user = {
             var data = $(this).serialize();
 
             $.ajax({
-                url: '_update/user/' + $('[name=username]').val(),
+                url: conf_path + '_update/user/' + $('[name=username]').val(),
                 type: 'PUT',
                 data: data,
                 complete: function(req) {

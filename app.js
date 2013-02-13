@@ -7,7 +7,7 @@ ddoc = {
     rewrites : [
         { from:'/', to:'_list/all/all', query: { descending: "true", limit: config.conf_perpage } },
         { from:'/newest', to:'_list/all/newest', query: { descending: "true", limit: config.conf_perpage } },
-        { from:'/item', to:'_list/item/item', query: { key: ":id" } },
+        { from:'/term/:id', to:'_list/item/item', query: { key: ":id" } },
         { from:'/user', to:'_list/user/user', query: { key: ":id", group: "true" } },
         { from:'/threads', to:'_list/threads/threads', query: { startkey: [":id"], endkey: [":id", {}], limit: config.conf_perpage } },
         { from:'/submitted', to:'_list/all/submitted', query: { startkey: [":id", {}], endkey: [":id"], descending: "true" } },
@@ -33,7 +33,7 @@ ddoc.views.all = {
 
             emit(score, {
                 doc: doc,
-                domain: util.getDomain(doc.url),
+                domain: doc._id,
                 points: points,
                 numcomments: numcomments
             });
@@ -48,7 +48,7 @@ ddoc.views.newest = {
 
             emit(doc.created_at, {
                 doc: doc,
-                domain: util.getDomain(doc.url),
+                domain: doc._id,
                 points: util.getPoints(doc.voted),
                 numcomments: util.getNumComments(doc.comments) 
             });
@@ -86,7 +86,7 @@ ddoc.views.item = {
 
             emit(doc._id, {
                 doc: doc,
-                domain: util.getDomain(doc.url),
+                domain: doc._id,
                 points: points,
                 numcomments: numcomments,
                 comments: comments
@@ -186,7 +186,7 @@ ddoc.views.submitted = {
 
             emit([doc.author, doc.created_at], {
                 doc: doc,
-                domain: util.getDomain(doc.url),
+                domain: doc._id,
                 points: util.getPoints(doc.voted),
                 numcomments: util.getNumComments(doc.comments) 
             });
@@ -199,7 +199,7 @@ ddoc.views.saved = {
         if(doc.type === 'item') {
             var util = require('views/lib/util');
             
-            var domain = util.getDomain(doc.url);
+            var domain = doc._id;
             var points = util.getPoints(doc.voted);
             var numcomments = util.getNumComments(doc.comments);
 
@@ -457,12 +457,12 @@ ddoc.shows.about = function(doc, req) {
 
 ddoc.updates = {};
 ddoc.updates.item = function(doc, req) {
+    var id = req.form.id;
     var title = req.form.t;
-    var url = req.form.u;
 
     if(!doc) {
         doc = {};
-        doc._id = req.uuid;
+        doc._id = id;
         // http://stackoverflow.com/questions/4812235/whats-the-best-way-to-store-datetimes-timestamps-in-couchdb
         doc.created_at = JSON.parse(JSON.stringify(new Date));
         doc.author = req.userCtx.name;
@@ -470,7 +470,6 @@ ddoc.updates.item = function(doc, req) {
     }
 
     doc.title = title;
-    doc.url = url;
     doc.type = 'item';
     
     return [doc, {
@@ -632,6 +631,13 @@ ddoc.validate_doc_update = function (newDoc, oldDoc, userCtx) {
         return s.match(/(^|\s)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/gi);
     }
 
+    function isUrlFriendly(str) { 
+        var re = /^(?=.{4})(?!.{21})[\w.-]*[a-z][\w-.]*$/i; 
+        var arr = str.match(re); 
+        if(!arr) { return false; } 
+        return true; 
+    }
+
     // are we logged in?
     var username = userCtx.name;
     if(!username || typeof username != "string" || username.length<1){
@@ -654,7 +660,6 @@ ddoc.validate_doc_update = function (newDoc, oldDoc, userCtx) {
             unchanged("created_at");
             unchanged("author");
             require("title");
-            require("url");
             require("voted");
             break;
     }
@@ -686,13 +691,12 @@ ddoc.validate_doc_update = function (newDoc, oldDoc, userCtx) {
             unchanged("created_at");
             unchanged("author");
             unchanged("title");
-            unchanged("url");
         } 
     }
 
-    // make sure url is formatted correctly
-    if(!isUrl(newDoc.url)) {
-        forbidden("URL is formatted incorrectly");
+    // make sure ID is formatted correctly
+    if(!isUrlFriendly(newDoc._id)) {
+        forbidden("ID is formatted incorrectly");
     }
 
     // TODO make sure other properties are of correct format as well.
