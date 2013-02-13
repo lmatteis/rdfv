@@ -207,7 +207,7 @@ var item = {
             var data = $(this).serialize();
             $.ajax({
                 type: "POST",
-                url: conf_path + 'r',
+                url: conf_path + '_update/item',
                 data: data,
                 complete: function(req) {
                     if (req.status == 200 || req.status == 201 || req.status == 202) {

@@ -632,7 +632,7 @@ ddoc.validate_doc_update = function (newDoc, oldDoc, userCtx) {
     }
 
     function isUrlFriendly(str) { 
-        var re = /^(?=.{4})(?!.{21})[\w.-]*[a-z][\w-.]*$/i; 
+        var re = /^(?=.{1})(?!.{100})[\w.-]*[a-z][\w-.]*$/i; 
         var arr = str.match(re); 
         if(!arr) { return false; } 
         return true; 

@@ -147,7 +147,8 @@ exports.formatdoc = function(content) {
         var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
         return text.replace(exp, function(url) {
             var shortUrl = url;
-            if(shortUrl.length > 60) shortUrl = shortUrl.substring(0, 60) + '...';
+            // no need for short urls in N-Triples
+            //if(shortUrl.length > 60) shortUrl = shortUrl.substring(0, 60) + '...';
             return '<a href="' + url + '">' + shortUrl + '</a>';
         }); 
     }
