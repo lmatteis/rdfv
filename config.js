@@ -4,7 +4,7 @@ module.exports = {
     conf_perpage : '30',
 
     conf_logo : 'http://www.w3.org/RDF/icons/rdf_w3c_icon.48',
-    conf_color: '#5CEDD2',
+    conf_color: '#71EEB8',
     conf_about : 'about',
 
     conf_point : 'point by',
