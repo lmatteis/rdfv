@@ -1,10 +1,10 @@
 module.exports = {
-    conf_title: 'hckr.it',
+    conf_title: 'RDF vocabularies',
     conf_path : '/',
     conf_perpage : '30',
 
-    conf_logo : 'http://i.imgur.com/jgLZr.gif',
-    conf_color: '#D9E7FF',
+    conf_logo : 'http://www.w3.org/RDF/icons/rdf_w3c_icon.48',
+    conf_color: '#5B82E1',
     conf_about : 'about',
 
     conf_point : 'point by',
