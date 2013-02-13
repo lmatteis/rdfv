@@ -170,11 +170,11 @@ var auth = {
     },
     login: function(username, password) {
         $.post('/_session', { name: username, password: password })
-        .error(function(req) {
+        .fail(function(req) {
             var j = $.parseJSON(req.responseText);
             $('.login_error').text(j.reason);
         })
-        .success(function() {
+        .done(function() {
             $(location).attr('href', '.');
         });
     },
@@ -205,14 +205,22 @@ var item = {
     submit: function() {
         $('.item-submit').submit(function(e) {
             var data = $(this).serialize();
-            $.post('r', data)
-            .error(function(jqXHR) {
-                var j = $.parseJSON(jqXHR.responseText);
-                $('.error').text(j.reason);
-            })
-            .success(function() {
-                $(location).attr('href', '.');
+            $.ajax({
+                type: "POST",
+                url: 'r',
+                data: data,
+                complete: function(req) {
+                    if (req.status == 200 || req.status == 201 || req.status == 202) {
+                        $(location).attr('href', '.');
+                    } else {
+                        console.log(2)
+                        var j = $.parseJSON(req.responseText);
+                        $('.error').text(j.reason);
+                    }
+                },
+                dataType: 'json'
             });
+            
 
             e.preventDefault();
         });

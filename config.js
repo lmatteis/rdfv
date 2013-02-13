@@ -1,10 +1,10 @@
 module.exports = {
     conf_title: 'RDF vocabularies',
-    conf_path : '/',
+    conf_path : '/rdfv/_design/news/_rewrite/',
     conf_perpage : '30',
 
     conf_logo : 'http://www.w3.org/RDF/icons/rdf_w3c_icon.48',
-    conf_color: '#5B82E1',
+    conf_color: '#5CEDD2',
     conf_about : 'about',
 
     conf_point : 'point by',
