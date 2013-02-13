@@ -1,0 +1,86 @@
+{{>head}}
+
+{{#user}}
+<script>
+$(function() {
+user.submit();
+});
+</script>
+<tr>
+    <td>
+        <form class="user-submit" method="post" action="/x">
+            <table border="0">
+                <tbody>
+                    <tr>
+                        <td valign="top">user:</td>
+                        <td>{{name}}</td>
+                    </tr>
+                    <!--
+                    <tr>
+                        <td valign="top">created:</td>
+                        <td>1413 days ago</td>
+                    </tr>
+                    -->
+                    <tr>
+                        <td valign="top">karma:</td>
+                        <td>{{karma}}</td>
+                    </tr>
+                    <tr>
+                        <td valign="top">about:</td>
+                        <td>
+                            {{#myprofile}}
+                            <input type="hidden" name="username" value="{{name}}" />
+                            <span class='error' style='color:red'></span>
+                            <textarea cols="60" rows="7" wrap="virtual" name="about">{{about}}</textarea>
+                            <font
+                            size="-2">
+                                <a href="{{>conf_path}}formatdoc"><font color="#afafaf">help</font></a>
+                                </font>
+                            {{/myprofile}}
+                            {{^myprofile}}
+                                {{{about_html}}}
+                            {{/myprofile}}
+                        </td>
+                    </tr>
+                    <!--
+                    <tr>
+                        <td></td>
+                        <td>
+                            <a href="/changepw"><u>change password</u></a>
+                        </td>
+                    </tr>
+                    -->
+                    {{#myprofile}}
+                    <tr>
+                        <td></td>
+                        <td>
+                            <a href="{{>conf_path}}saved?id={{name}}"><u>saved stories</u></a>
+                        </td>
+                    </tr>
+                    {{/myprofile}}
+                    <tr>
+                        <td></td>
+                        <td>
+                            <a href="{{>conf_path}}submitted?id={{name}}"><u>submissions</u></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <a href="{{>conf_path}}threads?id={{name}}"><u>comments</u></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            {{#myprofile}}
+            <br>
+            <input type="submit" value="update">
+            {{/myprofile}}
+        </form>
+        <br>
+        <br>
+    </td>
+</tr>
+{{/user}}
+
+{{>tail}}

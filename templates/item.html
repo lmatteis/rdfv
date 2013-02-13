@@ -1,0 +1,80 @@
+{{>head}}
+
+<tr>
+    <td>
+        {{#item}}
+<script>
+$(function() {
+    comments.getCommentsByParentId(0, '0');
+    comments.commentBind();
+    comments.scroll();
+});
+</script>
+        <table border="0">
+            <tbody>
+                <tr>
+                    {{>itemhead}}
+                </tr>
+                <tr>
+                    <td colspan="1"></td>
+                    {{>itemsubhead}}
+                </tr>
+                <tr style="height:10px"></tr>
+                <tr>
+                    <td></td>
+                    <td>
+                    <form method="post" action="/r" class="addcomment" doc_id="{{_id}}">
+                        <input type="hidden" name="parent_id" value="0" />
+                    <span style="color:red" class="error"></span>
+                    <br />
+                    <textarea name="text" rows="6" cols="60"></textarea>
+                            <br><br>
+                            <input type="submit" value="{{>conf_addcomment}}">
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        {{/item}}
+        <br><br>
+        <table border="0">
+            <tbody class="comments">
+                {{#comments}}
+                <tr comment_id="{{comment_id}}" parent_id="{{parent_id}}" score="{{score}}" style='display:none;'>
+                    <td>
+                        <table border="0">
+                            <tbody>
+                                <tr><td><img src="http://ycombinator.com/images/s.gif" height="1" width="0" class="level"></td>
+                                    <td valign="top">
+                                        <center>
+                                        {{>upvote}}
+                                        </center>
+                                    </td>
+                                    <td class="default">
+                                        <div style="margin-top:2px; margin-bottom:-10px; ">
+                                            <span class="comhead">{{points}} <a href="{{>conf_path}}user?id={{author}}">{{author}}</a>
+                                                {{pretty_date}} |
+                                                <a href="#{{comment_id}}" name="{{comment_id}}">link</a></span>
+                                        </div>
+                                        <br>
+                                        <span class="comment">
+                                            <font color="#000000">
+                                            {{{text}}}     
+                                            </font>
+                                            {{#username}}
+                                            <p><font size="1"><u><a class="commentreply" comment_id="{{comment_id}}" href="#">{{>conf_commentreply}}</a></u></font></p>
+                                            {{/username}}
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                {{/comments}}
+            </tbody>
+        </table>
+        <br><br>
+    </td>
+</tr>
+{{>tail}}

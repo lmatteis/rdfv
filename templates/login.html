@@ -1,0 +1,49 @@
+{{>head}}
+<tr>
+    <td>
+  <b>Login</b><br />
+  <br />
+  <span class='login_error' style='color:red'></span>
+
+  <form class='login' method="post" action="/_session">
+    <table border="0">
+      <tr>
+        <td>{{>conf_username}}:</td>
+
+        <td><input type="text" name="name" size="20" /></td>
+      </tr>
+
+      <tr>
+        <td>{{>conf_password}}:</td>
+
+        <td><input type="password" name="password" size="20" /></td>
+      </tr>
+    </table><br />
+    <input type="submit" value="{{>conf_login}}" />
+  </form><br />
+  <br />
+  <b>Create Account</b><br />
+  <br />
+
+  <span class='signup_error' style='color:red'></span>
+  <form method="post" action="/_users" class="signup">
+
+    <table border="0">
+      <tr>
+        <td>{{>conf_username}}:</td>
+
+        <td><input type="text" name="u" size="20" /></td>
+      </tr>
+
+      <tr>
+        <td>{{>conf_password}}:</td>
+
+        <td><input type="password" name="p" size="20" /></td>
+      </tr>
+    </table><br />
+    <input type="submit" value="create account" />
+  </form>
+  </td>
+</tr>
+
+{{>tail}}

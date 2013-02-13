@@ -1,0 +1,38 @@
+{{>head}}
+<script>
+$(function() {
+item.submit();
+});
+</script>
+<tr>
+    <td>
+        <form class='item-submit' method="post" action="/r">
+            <span class='error' style='color:red'></span>
+            <table border="0">
+                <tbody>
+                    <tr>
+                        <td>{{>conf_submittitle}}</td>
+                        <td>
+                            <input type="text" name="t" value="" size="50">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>url</td>
+                        <td>
+                            <input type="text" name="u" value="" size="50">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="submit" value="{{>conf_submit}}">
+                        </td>
+                    </tr>
+                    <tr style="height:20px"></tr>
+                </tbody>
+            </table>
+        </form>
+    </td>
+</tr>
+{{>tail}}
+

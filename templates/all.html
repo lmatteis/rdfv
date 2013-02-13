@@ -1,0 +1,32 @@
+{{>head}}
+
+      <tr>
+        <td>
+          <table border="0" cellpadding="0" cellspacing="0">
+            {{#rows}}
+            <tr>
+              <td align="right" valign="top" class="title">{{counter}}.</td>
+                {{>itemhead}}
+            </tr>
+
+            <tr>
+              <td colspan="2"></td>
+              {{>itemsubhead}}
+
+            </tr>
+
+            <tr style="height:5px">
+              <td></td>
+            </tr>
+            {{/rows}}
+
+            <tr style="height:10px"></tr>
+            <tr>
+              <td colspan="2"></td>
+
+              <td class="title"><a href="?skip={{skip}}" rel="nofollow">{{>conf_morelink}}</a></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+{{>tail}}
