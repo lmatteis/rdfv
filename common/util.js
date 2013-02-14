@@ -115,6 +115,16 @@ exports.timeDifference = function(current, previous, config) {
     }
 }
 
+
+exports.getTriplesRegex = function(escaped) {
+    if(escaped) {
+        var re = /(&lt;[^\s]+&gt;|_:([A-Za-z][A-Za-z0-9\-_]*))[ ]*&lt;[^\s]+&gt;[ ]*(&lt;[^\s]+&gt;|_:([A-Za-z][A-Za-z0-9\-_]*)|"((?:\\"|[^"])*)"(@([a-z]+[\-A-Za-z0-9]*)|\^\^&lt;([^&gt;]+)&gt;)?)[ ]*./ig;
+    } else {
+        var re = /(<[^\s]+>|_:([A-Za-z][A-Za-z0-9\-_]*))[ ]*<[^\s]+>[ ]*(<[^\s]+>|_:([A-Za-z][A-Za-z0-9\-_]*)|"((?:\\"|[^"])*)"(@([a-z]+[\-A-Za-z0-9]*)|\^\^<([^>]+)>)?)[ ]*./ig;
+    }
+    return re;
+}
+
 exports.formatdoc = function(content) {
     // does away with nasty characters
     var escapeHTML = function(s) {
@@ -139,7 +149,7 @@ exports.formatdoc = function(content) {
         return str.substr(indexOf + 1); 
     }
     function replaceNTriples(text) {
-        var re = /(&lt;([^\s]+)&gt;|_:([A-Za-z][A-Za-z0-9\-_]*))[ ]*&lt;[^\s]+&gt;[ ]*(&lt;[^\s]+&gt;|_:([A-Za-z][A-Za-z0-9\-_]*)|"((?:\\"|[^"])*)"(@([a-z]+[\-A-Za-z0-9]*)|\^\^&lt;([^&gt;]+)&gt;)?)[ ]*./ig;
+        var re = exports.getTriplesRegex(true);
         return text.replace(re, function(triple) {
             var subject = arguments[2];
             var hash = afterHash(subject);
