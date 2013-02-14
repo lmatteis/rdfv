@@ -133,10 +133,21 @@ exports.formatdoc = function(content) {
     content = escapeHTML(content);
 
     // find n-triples
+    function afterHash(str) {
+        var indexOf = str.indexOf("#");
+        if(indexOf == -1) return false;
+        return str.substr(indexOf + 1); 
+    }
     function replaceNTriples(text) {
-        var re = /(&lt;[^\s]+&gt;|_:([A-Za-z][A-Za-z0-9\-_]*))[ ]*&lt;[^\s]+&gt;[ ]*(&lt;[^\s]+&gt;|_:([A-Za-z][A-Za-z0-9\-_]*)|"((?:\\"|[^"])*)"(@([a-z]+[\-A-Za-z0-9]*)|\^\^&lt;([^&gt;]+)&gt;)?)[ ]*./ig;
+        var re = /(&lt;([^\s]+)&gt;|_:([A-Za-z][A-Za-z0-9\-_]*))[ ]*&lt;[^\s]+&gt;[ ]*(&lt;[^\s]+&gt;|_:([A-Za-z][A-Za-z0-9\-_]*)|"((?:\\"|[^"])*)"(@([a-z]+[\-A-Za-z0-9]*)|\^\^&lt;([^&gt;]+)&gt;)?)[ ]*./ig;
         return text.replace(re, function(triple) {
-            return '<code>' + triple + '</code>';
+            var subject = arguments[2];
+            var hash = afterHash(subject);
+            var ret = '<code>' + triple + '</code>';
+            if(hash) {
+                ret = '<a name="' + hash + '"></a>' + ret;
+            }
+            return ret;
         }); 
     }
     content = replaceNTriples(content);
