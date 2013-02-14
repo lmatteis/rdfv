@@ -1,7 +1,7 @@
 module.exports = {
     conf_title: 'RDF vocabularies',
-    conf_path : '/rdfv/_design/news/_rewrite/',
-    //conf_path : '/',
+    //conf_path : '/rdfv/_design/news/_rewrite/',
+    conf_path : '/',
     conf_perpage : '30',
 
     conf_logo : 'http://www.w3.org/RDF/icons/rdf_w3c_icon.48',

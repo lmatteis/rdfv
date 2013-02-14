@@ -118,9 +118,9 @@ exports.timeDifference = function(current, previous, config) {
 
 exports.getTriplesRegex = function(escaped) {
     if(escaped) {
-        var re = /(&lt;[^\s]+&gt;|_:([A-Za-z][A-Za-z0-9\-_]*))[ ]*&lt;[^\s]+&gt;[ ]*(&lt;[^\s]+&gt;|_:([A-Za-z][A-Za-z0-9\-_]*)|"((?:\\"|[^"])*)"(@([a-z]+[\-A-Za-z0-9]*)|\^\^&lt;([^&gt;]+)&gt;)?)[ ]*./ig;
+        var re = /(&lt;([^\s]+)&gt;|_:([A-Za-z][A-Za-z0-9\-_]*))[ ]*&lt;[^\s]+&gt;[ ]*(&lt;[^\s]+&gt;|_:([A-Za-z][A-Za-z0-9\-_]*)|"((?:\\"|[^"])*)"(@([a-z]+[\-A-Za-z0-9]*)|\^\^&lt;([^&gt;]+)&gt;)?)[ ]*./ig;
     } else {
-        var re = /(<[^\s]+>|_:([A-Za-z][A-Za-z0-9\-_]*))[ ]*<[^\s]+>[ ]*(<[^\s]+>|_:([A-Za-z][A-Za-z0-9\-_]*)|"((?:\\"|[^"])*)"(@([a-z]+[\-A-Za-z0-9]*)|\^\^<([^>]+)>)?)[ ]*./ig;
+        var re = /(<([^\s]+)>|_:([A-Za-z][A-Za-z0-9\-_]*))[ ]*<[^\s]+>[ ]*(<[^\s]+>|_:([A-Za-z][A-Za-z0-9\-_]*)|"((?:\\"|[^"])*)"(@([a-z]+[\-A-Za-z0-9]*)|\^\^<([^>]+)>)?)[ ]*./ig;
     }
     return re;
 }
