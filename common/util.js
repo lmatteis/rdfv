@@ -132,6 +132,15 @@ exports.formatdoc = function(content) {
     }
     content = escapeHTML(content);
 
+    // find n-triples
+    function replaceNTriples(text) {
+        var re = /(&lt;[^\s]+&gt;|_:([A-Za-z][A-Za-z0-9\-_]*))[ ]*&lt;[^\s]+&gt;[ ]*(&lt;[^\s]+&gt;|_:([A-Za-z][A-Za-z0-9\-_]*)|"((?:\\"|[^"])*)"(@([a-z]+[\-A-Za-z0-9]*)|\^\^&lt;([^&gt;]+)&gt;)?)[ ]*./ig;
+        return text.replace(re, function(triple) {
+            return '<code>' + triple + '</code>';
+        }); 
+    }
+    content = replaceNTriples(content);
+
     var newlines = '[\\r\\n]+';
 
     // first remove the newlines from the beginning and end of the content
@@ -141,15 +150,21 @@ exports.formatdoc = function(content) {
     // then replace each newlines with the paragraphs
     content = '<p>' + content.replace(new RegExp(newlines, 'g'), '</p><p>') + '</p>';
 
-
     // convert URL to actual urls trimmed 60 chars
     function replaceURLWithHTMLLinks(text) {
-        var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+        var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#;\/%=~_|])/ig;
         return text.replace(exp, function(url) {
-            var shortUrl = url;
+            var last = url[url.length - 4] + url[url.length - 3] + url[url.length - 2] + url[url.length - 1];
+            if(last == '&gt;') {
+                url = url.slice(0,-4);
+            }
+            var ret = '<a href="' + url + '">' + url + '</a>';
+            if(last == '&gt;') {
+                ret += '&gt;';
+            }
             // no need for short urls in N-Triples
             //if(shortUrl.length > 60) shortUrl = shortUrl.substring(0, 60) + '...';
-            return '<a href="' + url + '">' + shortUrl + '</a>';
+            return ret
         }); 
     }
     content = replaceURLWithHTMLLinks(content);

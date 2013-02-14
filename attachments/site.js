@@ -61,7 +61,7 @@ var comments = {
                 error: function(req) {
                     var j = $.parseJSON(req.responseText);
                     if(j.reason === 'Must be logged on') {
-                        $(location).attr('href', 'login');
+                        $(location).attr('href', conf_path + 'login');
                     }
                 }
             });
