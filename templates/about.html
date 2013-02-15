@@ -9,6 +9,15 @@
                             <td>
                                 <br>
                                 <br>
+                                <h4>Building your first vocabulary</h4>
+                                <ul>
+                                    <li>Click on <a href="{{>conf_path}}submit">submit</a> on the navigation bar at the top. (be sure you're logged in)</li>
+                                    <li>Fill in the basic information, such as the vocabulary ID and its title.</li>
+                                    <li>Now you can leave a comment and define your vocabulary terms in the comment itself. Here's an example of a vocabulary that is trying to describe Wine: <a href="http://www.vocabs.org/term/WineOntology">http://www.vocabs.org/term/WineOntology</a></li>
+                                    <li>You can also insert <a href="http://en.wikipedia.org/wiki/N-Triples">N-Triples</a> syntax directly in your comment. This way you can formally describe your ontology using triples. We will soon support <a href="http://en.wikipedia.org/wiki/Turtle_(syntax)">Turtle</a> as well.</li>
+                                    <li>When many different people have made their contributions to the vocabulary, you can click on the "download" link at the top of the vocabulary page, to export the entire vocabulary in N-Triples format.</li>
+                                    <li>Each of the properties/classes you've defined in the vocabulary (as comments), will also have their own URI. For example, in the WineOntology example above, the community has defined the class Wine with an URI of: <a href="http://www.vocabs.org/term/WineOntology#Wine">http://www.vocabs.org/term/WineOntology#Wine</a></li> (it's important to note that the URIs are automatically referenceable and link directly to the propert term inside the vocabulary)
+                                </ul>
                                 <h4>Objective</h4>
                                 <p>
                                 Allow people to build RDF vocabularies and ontologies, through a crowdsourcing community validation system, using common textual discourse and N-triples syntax.
@@ -18,11 +27,11 @@
                                 If you want to build a vocabulary yourself nowadays, there's a variety of different resources and tools. However, these require lots of training. You don't know how to correctly use them, and most of the time you build a semi-efficient ontology, which is probably redundant. Also, vocabularies are spread all over the internet, and it's hard to really get a feeling whether you should build something from scratch, or reuse an existing ontology.
                                 </p>
                                 <p>
-                                Not to mention that vocabularies are mostly static. Built by a single entity (ex. foaf). And what happens when a specific vocabulary doesn't have something you need? You're stuck with having to go look for something else, that better fits your needs.
+                                Not to mention that vocabularies are mostly static. Built by a single entity (ex. foaf). What happens when a specific vocabulary doesn't have something you need? You're stuck with having to go look for something else, that better fits your needs.
                                 </p>
-                                <h4>How</h4>
+                                <h4>How it works</h4>
                                 <p>
-                                This site uses powerful community-driven voting-based approaches, such as the ones used on StackOverflow or Hacker News, to allow people to discuss about an ontology and write triples definitions directly in the comments you're making.
+                                This site uses powerful community-driven voting-based approaches, such as the ones used on StackOverflow or Hacker News, to allow you to discuss about an ontology and write triples definitions directly in the comments you're making.
                                 </p>
                                 <p>
 You can comment using N-Triples syntax (Turtle to be supported), so anybody can extend a specific vocabulary. Then based on the amount of votes a specific comment gets, it will be more valuable, and it will automatically find its place in the final vocabulary: say 2 comments define the same "hasColor" property, only one has "10 points" and the other has only "2 points". The system will automatically do the filtering, and only the highest scored comments will find their place in the final vocabulary.
@@ -30,10 +39,6 @@ You can comment using N-Triples syntax (Turtle to be supported), so anybody can 
                                 <p>
 So in essence this is very similar to opening your text editor, and writing some Turtle syntax down. The cool part is that it happens online, so other people can immediately comment and validate what you wrote.
                                 
-                                </p>
-                                <h4>Features</h4>
-                                <p>
-                                <i>more to come...</i>
                                 </p>
                                     <br>
                                     <br>Luca Matteis
