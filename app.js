@@ -15,6 +15,7 @@ ddoc = {
         { from:'/about', to:'_show/about'},
         { from:'/login', to:'_show/login'},
         { from:'/submit', to:'_show/submit'},
+        { from:'/formatdoc', to:'_show/formatdoc'},
         { from:'/r', to:'_update/item'},
         { from:'/*', to:'*'}
     ]
@@ -477,6 +478,18 @@ ddoc.shows.about = function(doc, req) {
     };
 
     var html = Mustache.to_html(this.templates.about, data, this.templates.partials);
+    return html;
+}
+ddoc.shows.formatdoc = function(doc, req) {
+    var Mustache = require('views/lib/mustache');
+
+    var data = {
+        title: 'formatdoc',
+        username: req.userCtx.name,
+        login: !(req.userCtx.name)
+    };
+
+    var html = Mustache.to_html(this.templates.formatdoc, data, this.templates.partials);
     return html;
 }
 
