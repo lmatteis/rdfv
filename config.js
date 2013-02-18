@@ -4,7 +4,7 @@ module.exports = {
     conf_path : '/',
     conf_perpage : '30',
 
-    conf_logo : 'http://static.tumblr.com/t2pq5bl/u1ymif3us/logo.png',
+    conf_logo : 'http://static.tumblr.com/t2pq5bl/9nimif4dy/logo.jpg',
     conf_color: '#71EEB8',
     conf_about : 'about',
 
