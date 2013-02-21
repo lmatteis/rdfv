@@ -9,23 +9,16 @@
                             <td>
                                 <br>
                                 <br>
-                                <h4>What is www.vocabs.org?</h4>
+                                <h4>Abstract</h4>
                                 <p>
-                                It's a website that allows people to build RDF vocabularies and ontologies, through a crowdsourcing community validation system, using common textual discourse and N-triples syntax.
-                                </p>
-                                <h4>Why?</h4>
-                                <p>
-                                If you want to build a vocabulary yourself nowadays, there's a variety of different resources and tools. However, these require lots of training. You don't know how to correctly use them, and most of the time you build a semi-efficient ontology, which is probably redundant. Also, vocabularies are spread all over the internet, and it's hard to really get a feeling whether you should build something from scratch, or reuse an existing ontology.
-                                </p>
-                                <p>
-                                Not to mention that vocabularies are mostly static. Built by a single entity (ex. foaf). What happens when a specific vocabulary doesn't have something you need? You're stuck with having to go look for something else, that better fits your needs.
+                                The RDF (Resource Description Framework) community is in desperate need of a simpler way to create vocabularies and ontologies. Building a vocabulary requires many skills and lots of attention to detail. Even for a group of experts, this can become a daunting task, and many of the efforts can be wasteful if not consulted with a larger community of people. This is why we created <a href="http://www.vocabs.org">www.vocabs.org</a>. It allows  vocabularies to be created and validated by the community, through a simple web-based voting system. Similar to how Wikipedia has built the encyclopedia of crowdsourced content, Vocabs is trying to be a repository of community-driven vocabularies. You can initiate a discussion about a vocabulary you may want to build. Other members of the community will then see it and comment it. They can also further improve it with their own terminology. Finally, based on the total amount of votes each term has received, the system will automatically compile an RDF-friendly format of the entire conversation, allowing it to be consumed by popular semantic reasoners.
                                 </p>
                                 <h4>How it works</h4>
                                 <p>
-                                This site uses powerful community-driven voting-based approaches, such as the ones used on StackOverflow or Hacker News, to allow you to discuss about an ontology and write triples definitions directly in the comments you're making.
+                                This site uses powerful community-driven voting-based approaches, such as the ones used on StackOverflow or Hacker News, to allow you to discuss about an ontology and write triple definitions directly in the comments you're making.
                                 </p>
                                 <p>
-You can comment using N-Triples syntax (Turtle to be supported), so anybody can extend a specific vocabulary. Then based on the amount of votes a specific comment gets, it will be more valuable, and it will automatically find its place in the final vocabulary: say 2 comments define the same "hasColor" property, only one has "10 points" and the other has only "2 points". The system will automatically do the filtering, and only the highest scored comments will find their place in the final vocabulary.
+You can comment using N-Triples syntax (Turtle to be supported), so anybody can extend a specific vocabulary. Then based on the amount of votes a specific comment receives, it will be more valuable, and it will automatically find its place in the final vocabulary: for example say 2 comments define the same "hasColor" property, only one has "10 points" and the other has only "2 points". The system will automatically do the filtering, and only the highest scored comments will find their place in the final vocabulary.
                                 </p>
                                 <p>
 So in essence this is very similar to opening your text editor, and writing some Turtle syntax down. The cool part is that it happens online, so other people can immediately comment and validate what you wrote.
