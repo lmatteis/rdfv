@@ -4,7 +4,8 @@ module.exports = {
     conf_path : '/',
     conf_perpage : '30',
 
-    conf_logo : 'http://static.tumblr.com/t2pq5bl/9nimif4dy/logo.jpg',
+    conf_logo : 'http://static.tumblr.com/t2pq5bl/6vQmikblz/vocabs-logo-small.png',
+    conf_logo_large : 'http://static.tumblr.com/t2pq5bl/NrXmikbmd/vocabs-logo-large.png',
     conf_color: '#71EEB8',
     conf_about : 'about',
 
