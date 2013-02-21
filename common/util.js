@@ -172,15 +172,12 @@ exports.formatdoc = function(content) {
 
     // replace 2 or more indented spaces with code
     function replaceCode(text) {
-        var reg = '(\\r?\\n)' + //              # $1: CODE must be preceded by blank line
-                    '(' + //                    # $2: CODE contents
+        var reg = '(' + //                    # $2: CODE contents
                       '(?:' + //                # Group for multiple lines of code.
                         '(?:\\r?\\n)+' + //     # Each line preceded by a newline,
                         '(?:[ ]{2}|\\t).*' + // # and begins with two spaces or tab.
                       ')+' + //                 # One or more CODE lines
-                      '\\r?\\n' + //            # CODE folowed by blank line.
-                    ')' + //                    # End $2: CODE contents
-                    '(?=\\r?\\n)'; //           # CODE folowed by blank line.
+                    ')'; //                    # End $2: CODE contents
     
         return text.replace(new RegExp(reg, 'g'), function(code) {
             code = trimNewlines(code);
