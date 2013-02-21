@@ -142,12 +142,12 @@ exports.formatdoc = function(content) {
     }
     content = escapeHTML(content);
 
-    // find n-triples
     function afterHash(str) {
         var indexOf = str.indexOf("#");
         if(indexOf == -1) return false;
         return str.substr(indexOf + 1); 
     }
+    // find n-triples
     function replaceNTriples(text) {
         var re = exports.getTriplesRegex(true);
         return text.replace(re, function(triple) {
@@ -160,16 +160,41 @@ exports.formatdoc = function(content) {
             return ret;
         }); 
     }
-    content = replaceNTriples(content);
+    //content = replaceNTriples(content);
 
-    var newlines = '[\\r\\n]+';
+    function trimNewlines(str) {
+        var newlines = '[\\r\\n]+';
+        // first remove the newlines from the beginning and end of the content
+        str = str.replace(new RegExp('^' + newlines, 'g'), '');
+        str = str.replace(new RegExp(newlines + '$', 'g'), '');
+        return str;
+    }
+
+    // replace 2 or more indented spaces with code
+    function replaceCode(text) {
+        var reg = '(\\r?\\n)' + //              # $1: CODE must be preceded by blank line
+                    '(' + //                    # $2: CODE contents
+                      '(?:' + //                # Group for multiple lines of code.
+                        '(?:\\r?\\n)+' + //     # Each line preceded by a newline,
+                        '(?:[ ]{2}|\\t).*' + // # and begins with two spaces or tab.
+                      ')+' + //                 # One or more CODE lines
+                      '\\r?\\n' + //            # CODE folowed by blank line.
+                    ')' + //                    # End $2: CODE contents
+                    '(?=\\r?\\n)'; //           # CODE folowed by blank line.
+    
+        return text.replace(new RegExp(reg, 'g'), function(code) {
+            code = trimNewlines(code);
+            code = code.replace(/\r\n/g, "\n");
+            return '<pre><code>' + code + '</code></pre>';
+        })
+    }
+    content = replaceCode(content);
 
     // first remove the newlines from the beginning and end of the content
-    content = content.replace(new RegExp('^' + newlines, 'g'), '');
-    content = content.replace(new RegExp(newlines + '$', 'g'), '');
+    content = trimNewlines(content);
 
-    // then replace each newlines with the paragraphs
-    content = '<p>' + content.replace(new RegExp(newlines, 'g'), '</p><p>') + '</p>';
+    // then replace 2 or more newlines with the paragraphs
+    content = '<p>' + content.replace(/(\r\n){2,}/g, '</p><p>') + '</p>';
 
     // convert URL to actual urls trimmed 60 chars
     function replaceURLWithHTMLLinks(text) {
