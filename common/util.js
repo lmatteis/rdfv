@@ -218,10 +218,11 @@ exports.findTurtle = function(comments) {
     for(var i in comments) {
         var commentText = comments[i].text;
         var arr = commentText.match(exports.codeRegex);
+        if(!arr) continue;
         // if there's code in this comment, check if it's turtle
-        for(var i=0; i<arr.length; i++) { // if this runs, there's code!
+        if(arr.length && arr[0]) {
             // check if it's turtle
-            var codeBlock = arr[i];
+            var codeBlock = arr[0];
             if(!codeBlock) continue;
             try {
                 var rdf = turtle.parse(codeBlock);
