@@ -125,7 +125,13 @@ exports.getTriplesRegex = function(escaped) {
     return re;
 }
 
-exports.codeRegex = new RegExp('((?:^(?: {2}|\\t)[^\\r\\n]*$(\\r\\n)?)+)', 'm');
+var reg = '(' + //                    # $2: CODE contents
+                      '(?:' + //                # Group for multiple lines of code.
+                        '(?:\\r?\\n)+' + //     # Each line preceded by a newline,
+                        '(?:[ ]{2}|\\t).*' + // # and begins with two spaces or tab.
+                      ')+' + //                 # One or more CODE lines
+                    ')'; //                    # End $2: CODE contents
+exports.codeRegex = new RegExp(reg, 'g');
 
 exports.formatdoc = function(content) {
     // does away with nasty characters
