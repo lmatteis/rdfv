@@ -293,23 +293,9 @@ ddoc.lists.item = function(head, req) {
         var value = getRow()['value'];
         var doc = value.doc;
 
-        // loop through comments and find n-triples
         var comments = doc.comments;
-        var allComments = '';
-        for(var i in comments) {
-            var commentText = comments[i].text;
-            allComments += commentText;
-        }
-
-        // replace all newlines
-        allComments = allComments.replace(new RegExp('[\\r\\n]+', 'g'), '');
-        // now extract the N-Triples from this huge string
-        var arr = allComments.match(util.getTriplesRegex());
-        var ret = '';
-        for(var x in arr) {
-            ret += arr[x] + '\n';
-        }
-        return ret;
+        var turtle = util.findTurtle(comments);
+        return turtle;
     });
     provides('html', function(){
         var Mustache = require('views/lib/mustache');
