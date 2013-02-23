@@ -286,8 +286,8 @@ ddoc.lists.all = function(head, req) {
 };
 
 ddoc.lists.item = function(head, req) {
-    registerType("nt", "text/plain");
-    provides('nt', function(){
+    registerType("ttl", "text/turtle");
+    provides('ttl', function(){
         var util = require('views/lib/util');
 
         var value = getRow()['value'];
@@ -295,6 +295,10 @@ ddoc.lists.item = function(head, req) {
 
         var comments = doc.comments;
         var turtle = util.findTurtle(comments);
+        // add the @prefix of :
+        turtle = "@prefix : <http://www.vocabs.org/term/" + doc._id + "#> .\n" +   
+                    turtle;
+
         return turtle;
     });
     provides('html', function(){

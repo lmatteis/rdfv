@@ -235,18 +235,6 @@ exports.findTurtle = function(comments) {
     // now we have allValidTurtle! let's turn it into JSON!
 
     return allValidTurtle;
-
-    // validate if it's a turtle
-    for(var i=0; i<arr.length; i++) { // each of these should be a Turtle
-        allValidTurtle += arr[i] + "\n----\n";
-        /*
-        try {
-            var rdf = turtle.parse(arr[i]);
-        } catch(e) {
-        }
-        */
-    }
-    // now allValidTurtle should contain all turtle stuff
 }
 
 //--------------------- about this script -------------------------
