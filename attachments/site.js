@@ -123,6 +123,36 @@ var comments = {
             window.location.hash = location.hash;
             window.location.href = location.hash;
         }
+    },
+    edit: function() {
+        $('a.edit').click(function(e) {
+            var $this = $(this);
+            var $parent = $this.parents('td.default');
+
+            var $comment = $parent.find('span.comment');
+
+            var $form = $('.addcomment:first').clone();
+            // change the parent_id to be what we just clicked on
+            //$form.find('[name=parent_id]').val(commentId);
+            var $submit = $form.find('input[type=submit]');
+            $submit.val('edit');
+            $cancel = $('<input type="button" value="cancel" />');
+            $cancel.click(function() {
+                $form.remove();
+                $comment.show();
+            });
+            $form.append($cancel);
+
+            // make the textarea value
+            $form.find('textarea').val($.trim($comment.children().first().text()));
+
+            // insert after the comment
+            $form.insertAfter($comment);
+            $comment.hide();
+            
+            e.preventDefault();
+            e.stopPropagation();
+        });
     }
 };
 
